@@ -4,10 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ManeasyApplication {
-
+public class ApiManeasyApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ManeasyApplication.class, args);
+		SpringApplication.run(ApiManeasyApplication.class, args);
 	}
 
 }
