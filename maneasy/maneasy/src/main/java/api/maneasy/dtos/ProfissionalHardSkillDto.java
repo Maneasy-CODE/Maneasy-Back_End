@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
 
-public record ProfissionaisHardSkillDto(
+public record ProfissionalHardSkillDto(
 
         @NotBlank UUID id_profissional,
         @NotBlank UUID id_hard_skill

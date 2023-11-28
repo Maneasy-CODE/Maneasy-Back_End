@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "tb_profissionais_hardskills")
-public class ProfissionaisHardSkillModel implements Serializable {
+public class ProfissionalHardSkillModel implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
