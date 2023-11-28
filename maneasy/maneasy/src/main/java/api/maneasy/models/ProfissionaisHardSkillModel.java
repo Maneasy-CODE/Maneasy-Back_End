@@ -22,10 +22,11 @@ public class ProfissionaisHardSkillModel implements Serializable {
     @Column(name = "id_profissionais_hardskills", nullable = false)
     private UUID idProfssionalHardSkill;
 
+    @Id
     @ManyToMany
     @JoinColumn(name = "id_profissional", referencedColumnName = "id_profissional")
     private ProfissionalModel id_profissional;
-
+    @Id
     @ManyToMany
     @JoinColumn(name = "id_hard_skill", referencedColumnName = "id_hard_skill")
     private HardSkillModel id_hard_skill;

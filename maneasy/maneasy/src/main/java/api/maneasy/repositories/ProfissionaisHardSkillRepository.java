@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface ProfissionaisHardSkillRepository extends JpaRepository<ProfissionaisHardSkillModel, UUID> {
+    ProfissionaisHardSkillModel findById_profissional ()
 
 }
