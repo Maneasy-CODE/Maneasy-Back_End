@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "tb_servicos")
-public class ServicoModel implements Serializable, UserDatails {
+public class ServicoModel implements Serializable{
 
     @Serial
     private static final long serialVersionUID = 1L;
