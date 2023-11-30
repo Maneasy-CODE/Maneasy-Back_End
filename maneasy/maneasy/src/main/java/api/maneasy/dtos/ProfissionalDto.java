@@ -12,5 +12,5 @@ public record ProfissionalDto(
         Date terminoFerias,
         Short jornadaTrabalhoProfissional,
         Short horaExtra,
-        @NotNull UUID id_profissional
+        UUID id_profissional
 ) { }

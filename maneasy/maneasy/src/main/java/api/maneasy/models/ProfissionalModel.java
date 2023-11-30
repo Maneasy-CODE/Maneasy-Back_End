@@ -19,7 +19,7 @@ public class ProfissionalModel implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tb_profisionais", nullable = false)
+    @Column(name = "id_profissional", nullable = false)
     private UUID id;
 
     private String statusProfissional;

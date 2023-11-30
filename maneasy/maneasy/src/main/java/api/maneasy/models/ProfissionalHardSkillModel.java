@@ -20,14 +20,14 @@ public class ProfissionalHardSkillModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_profissionais_hardskills", nullable = false)
-    private UUID idProfssionalHardSkill;
+    private UUID id;
 
-    @Id
-    @ManyToMany
+
+    @ManyToOne
     @JoinColumn(name = "id_profissional", referencedColumnName = "id_profissional")
     private ProfissionalModel id_profissional;
-    @Id
-    @ManyToMany
+
+    @ManyToOne
     @JoinColumn(name = "id_hard_skill", referencedColumnName = "id_hard_skill")
     private HardSkillModel id_hard_skill;
 }
