@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
@@ -22,21 +23,21 @@ public class ServicoModel implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     @Column(name = "id_servico", nullable = false)
     private UUID id;
-
-    private boolean id_servicos;
-    private String nome_servicos;
-    private Date data_criacao;
-    private Date data_inicio;
-    private Date data_termino;
-    private String descricao_servicos;
-    private float orcamento;
-    private int tempo_servico;
+    private String nomeServicos;
+    @Temporal(TemporalType.DATE)
+    private Date dataCriacao;
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
+    @Temporal(TemporalType.DATE)
+    private Date dataTermino;
+    private String descricaoServicos;
+    private BigDecimal orcamento;
+    private int tempoServico;
     private String anexo;
-    private Decoder.Binary tipo_servicos;
+    private Boolean tipoServicos;
     private String consultoria;
-    private Enum status_servicos;
+    private String statusServicos;
 
 }
