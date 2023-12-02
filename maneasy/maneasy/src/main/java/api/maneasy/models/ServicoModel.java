@@ -23,10 +23,10 @@ public class ServicoModel implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    @Column(name = "id_servico", nullable = false)
+    @Column(name = "id_servicos", nullable = false)
     private UUID id;
 
-    private boolean id_servicos;
+
     private String nome_servicos;
     private Date data_criacao;
     private Date data_inicio;
@@ -35,7 +35,7 @@ public class ServicoModel implements Serializable{
     private float orcamento;
     private int tempo_servico;
     private String anexo;
-    private Decoder.Binary tipo_servicos;
+    private boolean tipo_servicos;
     private String consultoria;
     private Enum status_servicos;
 

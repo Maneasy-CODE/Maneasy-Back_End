@@ -15,7 +15,7 @@ public record ServicoDto (
     @NotBlank float orcamento,
     @NotBlank int tempo_servico,
     String anexo,
-    Decoder.Binary tipo_servicos,
+    boolean tipo_servicos,
     String consultoria,
      @NotBlank Enum status_servicos
 ){}
