@@ -30,9 +30,9 @@ public class SquadController {
         Optional<SquadModel> squadBuscada = squadRepository.findById(id);
 
         if (squadBuscada.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Squad não encontrado");
         }
         return ResponseEntity.status(HttpStatus.OK).body(squadBuscada.get());
     }
-
+    
 }

@@ -22,12 +22,12 @@ public class SquadModel implements Serializable{
     @Column(name = "id_squad", nullable = false)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_chamado", referencedColumnName = "id_chamado")
-    private ChamadoModel id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_servicos", referencedColumnName = "id_servicos")
-    private ServicoModel id;
+//    @ManyToOne
+//    @JoinColumn(name = "id_chamado", referencedColumnName = "id_chamado")
+//    private ChamadoModel id;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "id_servicos", referencedColumnName = "id_servicos")
+//    private ServicoModel id;
 
 }
