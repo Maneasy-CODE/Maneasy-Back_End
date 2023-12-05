@@ -18,7 +18,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/servicos", produces = {"application/jason"})
 public class ServicoController {
-
     @Autowired
     ServicoRepository servicoRepository;
 
@@ -28,18 +27,17 @@ public class ServicoController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> criarServico(@RequestBody @Valid ServicoDto servicosDto) {
+    public ResponseEntity<Object> criarServico(@RequestBody @Valid ServicoDto servicoDto) {
 
         ServicoModel novoServico = new ServicoModel();
-        BeanUtils.copyProperties(servicosDto, novoServico);
+        BeanUtils.copyProperties(servicoDto, novoServico);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(servicoRepository.save(novoServico));
     }
 
-    @GetMapping("/{isServico}")
+    @GetMapping("/{idServico}")
     public ResponseEntity<Object> buscarServico(@PathVariable(value = "idServico") UUID id) {
         Optional<ServicoModel> servicoBuscado = servicoRepository.findById(id);
-
         if (servicoBuscado.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body("Serviço não encontrado");
         }
