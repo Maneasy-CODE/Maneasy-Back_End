@@ -4,6 +4,7 @@ import api.maneasy.dtos.ProfissionalSquadsDto;
 import api.maneasy.models.ProfissionalSquadsModel;
 import api.maneasy.repositories.ProfissionalRepository;
 import api.maneasy.repositories.ProfissionalSquadsRepository;
+import api.maneasy.repositories.SquadRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,7 @@
 package api.maneasy.controllers;
 
 import api.maneasy.dtos.ProfissionalDto;
+import api.maneasy.dtos.UsuarioDto;
 import api.maneasy.models.ProfissionalModel;
 import api.maneasy.models.UsuarioModel;
 import api.maneasy.repositories.ProfissionalRepository;
@@ -44,6 +45,20 @@ public class ProfissionalController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(profissionalBuscado.get());
+    }
+
+    @PutMapping("/{idProfissional}")
+    public ResponseEntity<Object> editarProfissional(@PathVariable(value = "idProfissional") UUID id, @RequestBody @Valid ProfissionalDto profissionalDto) {
+        Optional<ProfissionalModel> profissionalBuscado = profissionalRepository.findById(id);
+
+        if (profissionalBuscado.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profissional não encontrado");
+        }
+
+        ProfissionalModel profissionalModel = profissionalBuscado.get();
+        BeanUtils.copyProperties(profissionalDto, profissionalModel);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(profissionalRepository.save(profissionalModel));
     }
 
     @DeleteMapping("/{idProfissional}")

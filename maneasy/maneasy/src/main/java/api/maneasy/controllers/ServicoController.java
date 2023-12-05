@@ -1,6 +1,8 @@
 package api.maneasy.controllers;
 
+import api.maneasy.dtos.ProfissionalDto;
 import api.maneasy.dtos.ServicoDto;
+import api.maneasy.models.ProfissionalModel;
 import api.maneasy.models.ServicoModel;
 import api.maneasy.repositories.ServicoRepository;
 //import org.hibernate.annotations.DialectOverride;
@@ -35,8 +37,8 @@ public class ServicoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(servicoRepository.save(novoServico));
     }
 
-    @GetMapping("/{idServico}")
-    public ResponseEntity<Object> buscarServico(@PathVariable(value = "idServico") UUID id) {
+    @GetMapping("/{idServicos}")
+    public ResponseEntity<Object> buscarServico(@PathVariable(value = "idServicos") UUID id) {
         Optional<ServicoModel> servicoBuscado = servicoRepository.findById(id);
         if (servicoBuscado.isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body("Serviço não encontrado");
@@ -45,8 +47,22 @@ public class ServicoController {
         return ResponseEntity.status(HttpStatus.OK).body(servicoBuscado.get());
     }
 
-    @DeleteMapping("/{idServico}")
-    public ResponseEntity<Object> deletarServico(@PathVariable(value = "idServico") UUID id) {
+    @PutMapping("/{idServicos}")
+    public ResponseEntity<Object> editarServico(@PathVariable(value = "idServicos") UUID id, @RequestBody @Valid ServicoDto servicoDto) {
+        Optional<ServicoModel> servicoBuscado = servicoRepository.findById(id);
+
+        if (servicoBuscado.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Servico não encontrado");
+        }
+
+        ServicoModel servicoModel = servicoBuscado.get();
+        BeanUtils.copyProperties(servicoDto, servicoModel);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(servicoRepository.save(servicoModel));
+    }
+
+    @DeleteMapping("/{idServicos}")
+    public ResponseEntity<Object> deletarServico(@PathVariable(value = "idServicos") UUID id) {
         Optional<ServicoModel> servicoBuscado = servicoRepository.findById(id);
 
         if (servicoBuscado.isEmpty()) {
