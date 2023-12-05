@@ -1,2 +1,0 @@
-USE bd_maneasy;
-
