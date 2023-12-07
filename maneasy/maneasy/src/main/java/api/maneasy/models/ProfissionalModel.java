@@ -12,14 +12,14 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_profisionais")
+@Table(name = "tb_profissionais")
 public class ProfissionalModel implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "tb_profisionais", nullable = false)
+    @Column(name = "id_profissional", nullable = false)
     private UUID id;
 
     private String statusProfissional;
@@ -35,6 +35,6 @@ public class ProfissionalModel implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
-    private UsuarioModel profissional;
+    private UsuarioModel usuario;
 
 }

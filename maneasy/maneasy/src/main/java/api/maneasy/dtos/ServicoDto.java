@@ -15,10 +15,13 @@ public record ServicoDto (
         @NotNull Date dataTermino,
         @NotBlank String descricaoServicos,
         @NotBlank BigDecimal orcamento,
+        //Fazer logica de tempo com tipo de serviço, se uma quantidade um tipo, se outra quantidade, outro tipo
+        //+640h é do tipo projeto e menos é do tipo demanda
         @NotNull int tempoServico,
         @NotNull String anexo,
         Boolean tipoServicos,
-        @NotBlank String statusServicos
+        @NotBlank String Consultoria,
+        @NotBlank byte statusServicos
 ) {
 
 }

@@ -37,6 +37,6 @@ public class ServicoModel implements Serializable{
     private String anexo;
     private Boolean tipoServicos;
     private String consultoria;
-    private String statusServicos;
+    private byte statusServicos;
 
 }

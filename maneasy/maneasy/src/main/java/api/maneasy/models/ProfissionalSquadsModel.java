@@ -21,11 +21,11 @@ public class ProfissionalSquadsModel implements Serializable {
     @Column(name = "tb_profissionais_squads", nullable = false)
     private UUID id;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "id_profissional", referencedColumnName = "id_profissional")
-    private ProfissionalModel id_profissional;
+    private ProfissionalModel profissional;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "id_squad", referencedColumnName = "id_squad")
     private SquadModel id_squads;
 }

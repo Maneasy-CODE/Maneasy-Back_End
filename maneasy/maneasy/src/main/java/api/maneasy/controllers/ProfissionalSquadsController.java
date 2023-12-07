@@ -46,10 +46,12 @@ public class ProfissionalSquadsController {
         }
 
         var profissional = profissionalRepository.findById(profissionalSquadsDto.id_profissional());
+
         if (profissional.isPresent()){
-            novoProfissionalSquad.setId_profissional(profissional.get());
+            novoProfissionalSquad.setProfissional(profissional.get());
         } else {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Profissional nao encontrado");        }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Profissional nao encontrado");
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(profissionalSquadRepository.save(novoProfissionalSquad));
     }

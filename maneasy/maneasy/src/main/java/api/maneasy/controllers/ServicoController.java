@@ -22,6 +22,22 @@ import java.util.UUID;
 public class ServicoController {
     @Autowired
     ServicoRepository servicoRepository;
+    private ServicoDto definirTipoDeServico(ServicoDto servicoDto) {
+        boolean tipoServico = servicoDto.tempoServico() > 640;
+        return new ServicoDto(
+                servicoDto.nomeServicos(),
+                servicoDto.dataCriacao(),
+                servicoDto.dataInicio(),
+                servicoDto.dataTermino(),
+                servicoDto.descricaoServicos(),
+                servicoDto.orcamento(),
+                servicoDto.tempoServico(),
+                servicoDto.anexo(),
+                tipoServico,
+                servicoDto.Consultoria(),
+                servicoDto.statusServicos()
+        );
+    }
 
     @GetMapping
     public ResponseEntity<List<ServicoModel>> listarServicos() {
@@ -30,12 +46,15 @@ public class ServicoController {
 
     @PostMapping
     public ResponseEntity<Object> criarServico(@RequestBody @Valid ServicoDto servicoDto) {
+        ServicoDto servicoComTipoDefinido = definirTipoDeServico(servicoDto);
 
         ServicoModel novoServico = new ServicoModel();
-        BeanUtils.copyProperties(servicoDto, novoServico);
+        BeanUtils.copyProperties(servicoComTipoDefinido, novoServico);
+        ServicoModel servicoSalvo = servicoRepository.save(novoServico);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(servicoRepository.save(novoServico));
+        return ResponseEntity.status(HttpStatus.CREATED).body(servicoSalvo);
     }
+
 
     @GetMapping("/{idServicos}")
     public ResponseEntity<Object> buscarServico(@PathVariable(value = "idServicos") UUID id) {
@@ -50,15 +69,16 @@ public class ServicoController {
     @PutMapping("/{idServicos}")
     public ResponseEntity<Object> editarServico(@PathVariable(value = "idServicos") UUID id, @RequestBody @Valid ServicoDto servicoDto) {
         Optional<ServicoModel> servicoBuscado = servicoRepository.findById(id);
-
-        if (servicoBuscado.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Servico não encontrado");
+        if (!servicoBuscado.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Serviço não encontrado");
         }
 
-        ServicoModel servicoModel = servicoBuscado.get();
-        BeanUtils.copyProperties(servicoDto, servicoModel);
+        ServicoDto servicoComTipoDefinido = definirTipoDeServico(servicoDto);
+        ServicoModel servicoAtualizado = servicoBuscado.get();
+        BeanUtils.copyProperties(servicoComTipoDefinido, servicoAtualizado);
+        servicoRepository.save(servicoAtualizado);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(servicoRepository.save(servicoModel));
+        return ResponseEntity.status(HttpStatus.OK).body(servicoAtualizado);
     }
 
     @DeleteMapping("/{idServicos}")
@@ -71,6 +91,8 @@ public class ServicoController {
         servicoRepository.delete(servicoBuscado.get());
         return ResponseEntity.status(HttpStatus.OK).body("Servico deletado com sucesso!");
     }
+
+
 }
 
 
