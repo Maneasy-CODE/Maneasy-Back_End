@@ -107,6 +107,11 @@ INSERT INTO tb_servicos (id_servicos, nome_servicos, data_criacao, data_inicio, 
   (UUID_TO_BIN('2d9dbf6484c711ee988960189550df2e'), UUID_TO_BIN('2d9afc7a84c711ee988960189550df2e')),
   (UUID_TO_BIN('2d9dbf6484c711ee988960189550df2e'), UUID_TO_BIN('2d9afbf084c711ee988960189550df2e'));
   
+INSERT INTO tb_profissionais_hardskills (id_profissionais_hardskills, id_profissional, id_hard_skill) VALUES
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('2d9dbf6484c711ee988960189550df2e'), UUID_TO_BIN('2d9afbf084c711ee988960189550df2e'));
+
+  SELECT BIN_TO_UUID(id_profissionais_hardskills) FROM tb_profissionais_hardskills;
+  
   SELECT * FROM tb_profissionais_hardskills;
   SELECT BIN_TO_UUID(id_profissional), BIN_TO_UUID(id_hard_skill) FROM tb_profissionais_hardskills;
   
@@ -133,3 +138,18 @@ INSERT INTO tb_servicos (id_servicos, nome_servicos, data_criacao, data_inicio, 
   
   SELECT * FROM tb_profissionais_squads;
   SELECT BIN_TO_UUID(id_profissional), BIN_TO_UUID(id_squad) FROM tb_profissionais_squads;
+  
+  INSERT INTO tb_dados_volkswagen (id_dados_volkswagen, chapa_usuario, nome_usuario, email, tipos_usuario) VALUES
+  (UUID_TO_BIN(UUID()), 1001, 'João Silva', 'joao@example.com', 'Administrador'),
+  (UUID_TO_BIN(UUID()), 1002, 'Ana Pereira', 'ana@example.com', 'Gestor'),
+  (UUID_TO_BIN(UUID()), 1003, 'Carlos Santos', 'carlos@example.com', 'Profissional'),
+  (UUID_TO_BIN(UUID()), 1004, 'Maria Rodrigues', 'maria@example.com', 'Comum'),
+  (UUID_TO_BIN(UUID()), 1005, 'Lucas Ferreira', 'lucas@example.com', 'Gestor'),
+  (UUID_TO_BIN(UUID()), 1006, 'Fernanda Gomes', 'fernanda@example.com', 'Administrador'),
+  (UUID_TO_BIN(UUID()), 1007, 'Ricardo Alves', 'ricardo@example.com', 'Comum'),
+  (UUID_TO_BIN(UUID()), 1008, 'Mariana Martins', 'mariana@example.com', 'Profissional'),
+  (UUID_TO_BIN(UUID()), 1009, 'André Oliveira', 'andre@example.com', 'Gestor'),
+  (UUID_TO_BIN(UUID()), 1010, 'Juliana Santos', 'juliana@example.com', 'Administrador');
+  
+  SELECT * FROM tb_dados_volkswagen;
+
