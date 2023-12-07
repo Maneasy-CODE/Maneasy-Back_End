@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,18 +18,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(
-        value = {"/chamado"},
-        produces = {"application/json"}
-)
+@RequestMapping(value = {"/chamado"}, produces = {"application/json"})
 public class ChamadoController {
     @Autowired
     ChamadoRepository chamadoRepository;
     @Autowired
     FileUploadService fileUploadService;
 
-    public ChamadoController() {
-    }
 
     @GetMapping
     public ResponseEntity<List<ChamadoModel>> listarChamados() {
@@ -41,11 +37,25 @@ public class ChamadoController {
         return chamadoBuscado.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body("Chamado no encontrado") : ResponseEntity.status(HttpStatus.OK).body(chamadoBuscado.get());
     }
 
-    public ResponseEntity<Object> cadastrarChamado(@RequestBody @Valid ChamadoDto dadosRecibidos) {
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<Object> cadastrarChamado(@ModelAttribute @Valid ChamadoDto dadosRecibidos){
         ChamadoModel chamadoModel = new ChamadoModel();
         BeanUtils.copyProperties(dadosRecibidos, chamadoModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.chamadoRepository.save(chamadoModel));
+
+        String urlAnexo;
+
+        try {
+            urlAnexo = fileUploadService.fazerUpload(dadosRecibidos.anexo());
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
+        chamadoModel.setUrl_img(urlAnexo);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(chamadoRepository.save(chamadoModel));
+
     }
+
 
     @PutMapping(
             value = {"/{id_chamado}"},

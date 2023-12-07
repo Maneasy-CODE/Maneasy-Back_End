@@ -28,8 +28,7 @@ public class FileUploadService {
             String novoNome = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyyHHmmss"));
             String extencaoArquivo = nomeArquivoArray[nomeArquivoArray.length - 1];
             String nomeImg = novoNome + "." + extencaoArquivo;
-            String var10002 = String.valueOf(this.diretorioImg);
-            File imagemCriada = new File(var10002 + "\\" + nomeImg);
+            File imagemCriada = new File(diretorioImg + "\\" + nomeImg);
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(imagemCriada));
             stream.write(imagem.getBytes());
             stream.close();
