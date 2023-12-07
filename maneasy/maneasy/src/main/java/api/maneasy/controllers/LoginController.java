@@ -12,25 +12,28 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+//@RequestMapping(value = "/login", produces = {"application/json"})
 public class LoginController {
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private TokenService tokenService;
+
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody @Valid LoginDto dadosLogin) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(dadosLogin.email(), dadosLogin.senha());
 
         var auth = authenticationManager.authenticate(usernamePassword);
+        return ResponseEntity.status(HttpStatus.OK).body(usernamePassword);
 
-        var token = tokenService.gerarToken((UsuarioModel) auth.getPrincipal());
-
-        return ResponseEntity.status(HttpStatus.OK).body(new TokenDto(token));
+//        var token = tokenService.gerarToken((UsuarioModel) auth.getPrincipal());
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(new TokenDto(token));
     }
 }

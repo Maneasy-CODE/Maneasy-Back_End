@@ -1,5 +1,6 @@
 package api.maneasy.dtos;
 
+import api.maneasy.models.TipoModel;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -12,7 +13,7 @@ public record UsuarioDto(
 
         @NotBlank String senha,
 
-        @NotBlank String tipos_usuario
+        @NotBlank TipoModel tipos_usuario
 )
 {
 
