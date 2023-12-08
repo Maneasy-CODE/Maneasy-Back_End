@@ -35,13 +35,16 @@ public class UsuarioController {
 
         return ResponseEntity.status(HttpStatus.OK).body(usuarioBuscado.get());
     }
-
+    @RequestMapping
     @PostMapping
     public ResponseEntity<Object> criarUsuario(@RequestBody @Valid UsuarioDto usuarioDto){
         if (usuarioRepository.findByEmail(usuarioDto.email()) != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email já cadastrado no sistema");
         }
         if (usuarioRepository.findByChapa(usuarioDto.chapa_usuario()) !=null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Chapa já cadastrado no sistema");
+        }
+        if (usuarioRepository.findByChapa(usuarioDto.chapa_usuario()) != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Chapa já cadastrado no sistema");
         }
 
