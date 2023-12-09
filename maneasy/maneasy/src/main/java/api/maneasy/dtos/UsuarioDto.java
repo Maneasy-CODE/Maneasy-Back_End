@@ -8,7 +8,7 @@ public record UsuarioDto(
 
         @NotBlank @Email(message = "O email deve estar no formato válido") String email,
 
-        @NotBlank String chapa_usuario,
+        @NotBlank String chapa,
 
         @NotBlank String senha,
 

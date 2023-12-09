@@ -41,10 +41,7 @@ public class UsuarioController {
         if (usuarioRepository.findByEmail(usuarioDto.email()) != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email já cadastrado no sistema");
         }
-        if (usuarioRepository.findByChapa(usuarioDto.chapa_usuario()) !=null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Chapa já cadastrado no sistema");
-        }
-        if (usuarioRepository.findByChapa(usuarioDto.chapa_usuario()) != null) {
+        if (usuarioRepository.findByChapa(usuarioDto.chapa()) !=null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Chapa já cadastrado no sistema");
         }
 
