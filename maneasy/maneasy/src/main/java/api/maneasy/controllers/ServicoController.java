@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/servicos", produces = {"application/jason"})
+@RequestMapping(value = "/servicos", produces = {"application/json"})
 public class ServicoController {
     @Autowired
     ServicoRepository servicoRepository;
@@ -24,14 +26,15 @@ public class ServicoController {
         return ResponseEntity.status(HttpStatus.OK).body(servicoRepository.findAll());
     }
 
-    @PostMapping
-    public ResponseEntity<Object> criarServico(@RequestBody @Valid ServicoDto servicoDto) {
-
-        ServicoModel novoServico = new ServicoModel();
-        BeanUtils.copyProperties(servicoDto, novoServico);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(servicoRepository.save(novoServico));
+    @GetMapping("/por-titulo")
+    public ResponseEntity<List<ServicoModel>> listarServicosPorTitulo(@RequestParam String titulo) {
+        List<ServicoModel> servicosEncontrados = servicoRepository.findByNome_servicosContainingIgnoreCase(titulo);
+        if (servicosEncontrados.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyList());
+        }
+        return ResponseEntity.ok(servicosEncontrados);
     }
+
     @GetMapping("/{idServicos}")
     public ResponseEntity<Object> buscarServico(@PathVariable(value = "idServicos") UUID id) {
         Optional<ServicoModel> servicoBuscado = servicoRepository.findById(id);
@@ -40,6 +43,15 @@ public class ServicoController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(servicoBuscado.get());
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> criarServico(@RequestBody @Valid ServicoDto servicoDto) {
+        ServicoModel servicoModel = new ServicoModel();
+
+        BeanUtils.copyProperties(servicoDto, servicoModel);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(servicoRepository.save(servicoModel));
     }
 
     @PutMapping("/{idServicos}")
@@ -65,8 +77,6 @@ public class ServicoController {
         servicoRepository.delete(servicoBuscado.get());
         return ResponseEntity.status(HttpStatus.OK).body("Servico deletado com sucesso!");
     }
-
-
 }
 
 
