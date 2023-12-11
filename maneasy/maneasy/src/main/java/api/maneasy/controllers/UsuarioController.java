@@ -3,6 +3,7 @@ package api.maneasy.controllers;
 import api.maneasy.dtos.UsuarioDto;
 import api.maneasy.models.UsuarioModel;
 import api.maneasy.repositories.UsuarioRepository;
+import api.maneasy.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class UsuarioController {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioService service;
 
     @GetMapping
     public ResponseEntity<List<UsuarioModel>> listarUsuarios() {
@@ -37,19 +40,15 @@ public class UsuarioController {
     }
     @RequestMapping
     @PostMapping
-    public ResponseEntity<Object> criarUsuario(@RequestBody @Valid UsuarioDto usuarioDto){
-        if (usuarioRepository.findByEmail(usuarioDto.email()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email já cadastrado no sistema");
-        }
-        if (usuarioRepository.findByChapa(usuarioDto.chapa()) !=null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Chapa já cadastrado no sistema");
-        }
+    public ResponseEntity<UsuarioModel> criarUsuario(@RequestBody @Valid UsuarioDto usuarioDto){
 
-        UsuarioModel usuarioModel = new UsuarioModel();
-        BeanUtils.copyProperties(usuarioDto, usuarioModel);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioRepository.save(usuarioModel));
+        UsuarioModel usuarioModel = service.createUser(usuarioDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioModel);
     }
+
+
     @PutMapping("/{idUsuario}")
     public ResponseEntity<Object> editarUsuario(@PathVariable(value = "idUsuario") UUID id, @RequestBody @Valid UsuarioDto usuarioDto) {
         Optional<UsuarioModel> usuarioBuscado = usuarioRepository.findById(id);

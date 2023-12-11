@@ -32,8 +32,19 @@ public class UsuarioModel implements Serializable, UserDetails {
     private String chapa;
     private String email;
     private String senha;
+    @Enumerated(EnumType.STRING)
     private TipoModel tipos_usuario;
 
+    public UsuarioModel() {
+    }
+
+    public UsuarioModel(String nome_usuario, String chapa, String email, String senha, TipoModel tipos_usuario) {
+        this.nome_usuario = nome_usuario;
+        this.chapa = chapa;
+        this.email = email;
+        this.senha = senha;
+        this.tipos_usuario = tipos_usuario;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
