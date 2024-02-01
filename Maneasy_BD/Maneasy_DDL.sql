@@ -13,17 +13,18 @@ CREATE TABLE tb_servicos(
     tempo_servico INT NOT NULL,
 	anexo VARCHAR(2048),
     tipo_servicos BIT NOT NULL,
+    /* 0 demanda, 1 projeto*/
     consultoria VARCHAR(2048),
     status_servicos TINYINT NOT NULL
 	/*status_servicos ENUM('Aberto', 'Em andamento', 'Finalizado') NOT NULL*/
 );
 
-CREATE TABLE tb_chamados(
+/*CREATE TABLE tb_chamados(
 	id_chamado BINARY(16) NOT NULL PRIMARY KEY,
     setor VARCHAR(255) NOT NULL,
     nome_solicitante VARCHAR(255) NOT NULL,
-	chapa_usuario INT NOT NULL UNIQUE,
-    nome_atendente VARCHAR(255) NOT NULL,
+	/*chapa_usuario INT NOT NULL,*/
+    /*nome_atendente VARCHAR(255) NOT NULL,
     data_criacao DATE NOT NULL,
     data_inicio DATE NOT NULL,
     data_termino DATE NOT NULL,
@@ -31,7 +32,7 @@ CREATE TABLE tb_chamados(
     anexo VARCHAR(2048) NOT NULL,
     status_chamado TINYINT NOT NULL    
 	/*status_chamado ENUM('Aberto', 'Em andamento', 'Finalizado') NOT NULL*/
-);
+/*);*/
 
 CREATE TABLE tb_hard_skills(
 	id_hard_skill BINARY(16) NOT NULL PRIMARY KEY,
