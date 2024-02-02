@@ -49,7 +49,7 @@ CREATE TABLE tb_usuarios(
     /*tipos_usuario ENUM ('Administrador', 'Gestor', 'Profissional', 'Comum') NOT NULL*/
 );
 
-CREATE TABLE tb_profisionais(
+CREATE TABLE tb_profissionais(
 	id_profissional BINARY(16) NOT NULL PRIMARY KEY,
     status_profissional TINYINT NOT NULL,
     /*status_profissional ENUM('Ativo', 'Inativo', 'Férias', 'Afastado') NOT NULL,*/
