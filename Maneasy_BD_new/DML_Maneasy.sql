@@ -47,29 +47,29 @@ INSERT INTO tb_servicos (id_servicos, nome_servicos, data_criacao, data_inicio, 
 
     
   INSERT INTO tb_usuarios (id_usuario, chapa_usuario, nome_usuario, email, senha, tipos_usuario) VALUES
-  (UUID_TO_BIN('aa3e2ced-c091-11ee-847c-601895604814'), 1001, 'João Silva', 'joao@example.com', 'senha123', '0'),
-  (UUID_TO_BIN('aa3e43d8-c091-11ee-847c-601895604814'), 1002, 'Ana Pereira', 'ana@example.com', 'senha456', '1'),
-  (UUID_TO_BIN('aa3e45b3-c091-11ee-847c-601895604814'), 1003, 'Carlos Santos', 'carlos@example.com', 'senha789', '2'),
-  (UUID_TO_BIN('aa3e4631-c091-11ee-847c-601895604814'), 1004, 'Maria Rodrigues', 'maria@example.com', 'senhaabc', '3'),
-  (UUID_TO_BIN('aa3e4691-c091-11ee-847c-601895604814'), 1005, 'Lucas Ferreira', 'lucas@example.com', 'senha1234', '1'),
-  (UUID_TO_BIN('aa3e4713-c091-11ee-847c-601895604814'), 1006, 'Fernanda Gomes', 'fernanda@example.com', 'senha5678', '2'),
-  (UUID_TO_BIN('aa3e4776-c091-11ee-847c-601895604814'), 1007, 'Ricardo Alves', 'ricardo@example.com', 'senha90ab', '2'),
-  (UUID_TO_BIN('aa3e47f3-c091-11ee-847c-601895604814'), 1008, 'Mariana Martins', 'mariana@example.com', 'senhacdef', '3'),
-  (UUID_TO_BIN('aa3e485c-c091-11ee-847c-601895604814'), 1009, 'André Oliveira', 'andre@example.com', 'senhaghi', '1'),
-  (UUID_TO_BIN('aa3e48ce-c091-11ee-847c-601895604814'), 1010, 'Juliana Santos', 'juliana@example.com', 'senhajklm', '2');
+  (UUID_TO_BIN('aa3e2ced-c091-11ee-847c-601895604814'), 1001, 'João Silva', 'joao@example.com', 'senha123', 'ADMIN'),
+  (UUID_TO_BIN('aa3e43d8-c091-11ee-847c-601895604814'), 1002, 'Ana Pereira', 'ana@example.com', 'senha456', 'ADMIN'),
+  (UUID_TO_BIN('aa3e45b3-c091-11ee-847c-601895604814'), 1003, 'Carlos Santos', 'carlos@example.com', 'senha789', 'ADMIN'),
+  (UUID_TO_BIN('aa3e4631-c091-11ee-847c-601895604814'), 1004, 'Maria Rodrigues', 'maria@example.com', 'senhaabc', 'ADMIN'),
+  (UUID_TO_BIN('aa3e4691-c091-11ee-847c-601895604814'), 1005, 'Lucas Ferreira', 'lucas@example.com', 'senha1234', 'ADMIN'),
+  (UUID_TO_BIN('aa3e4713-c091-11ee-847c-601895604814'), 1006, 'Fernanda Gomes', 'fernanda@example.com', 'senha5678', 'ADMIN'),
+  (UUID_TO_BIN('aa3e4776-c091-11ee-847c-601895604814'), 1007, 'Ricardo Alves', 'ricardo@example.com', 'senha90ab', 'ADMIN'),
+  (UUID_TO_BIN('aa3e47f3-c091-11ee-847c-601895604814'), 1008, 'Mariana Martins', 'mariana@example.com', 'senhacdef', 'ADMIN'),
+  (UUID_TO_BIN('aa3e485c-c091-11ee-847c-601895604814'), 1009, 'André Oliveira', 'andre@example.com', 'senhaghi', 'ADMIN'),
+  (UUID_TO_BIN('aa3e48ce-c091-11ee-847c-601895604814'), 1010, 'Juliana Santos', 'juliana@example.com', 'senhajklm', 'ADMIN');
   
   SELECT *, BIN_TO_UUID(id_usuario) FROM tb_usuarios;
   SELECT BIN_TO_UUID(id_usuario) FROM tb_usuarios;
   
-  INSERT INTO tb_profisionais (id_profissional, status_profissional, inicio_ferias, termino_ferias, jornada_trabalho_profissional, hora_extra, id_usuario) VALUES
+  INSERT INTO tb_profissionais (id_profissional, status_profissional, inicio_ferias, termino_ferias, jornada_trabalho_profissional, hora_extra, id_usuario) VALUES
   (UUID_TO_BIN('366a7b4a-c09a-11ee-847c-601895604814'), '0', NULL, NULL, 40, 0, UUID_TO_BIN('aa3e45b3-c091-11ee-847c-601895604814')),
   (UUID_TO_BIN('366d45c6-c09a-11ee-847c-601895604814'), '1', NULL, NULL, 40, 0, UUID_TO_BIN('aa3e48ce-c091-11ee-847c-601895604814')),
   (UUID_TO_BIN('366d48f9-c09a-11ee-847c-601895604814'), '2', '2023-12-01', '2023-12-15', 30, 5, UUID_TO_BIN('aa3e4776-c091-11ee-847c-601895604814'));
   /*status_profissional ENUM('Ativo', 'Inativo', 'Férias', 'Afastado') NOT NULL,*/
   
-  SELECT *, BIN_TO_UUID(id_profissional) FROM tb_profisionais;  
-  SELECT BIN_TO_UUID(id_profissional) FROM tb_profisionais;
-  SELECT *  FROM tb_profisionais INNER JOIN tb_usuarios ON tb_profisionais.id_profissional = tb_usuarios.id_usuario;
+  SELECT *, BIN_TO_UUID(id_profissional) FROM tb_profissionais;  
+  SELECT BIN_TO_UUID(id_profissional) FROM tb_profissionais;
+  SELECT *  FROM tb_profissionais INNER JOIN tb_usuarios ON tb_profissionais.id_profissional = tb_usuarios.id_usuario;
   
   INSERT INTO tb_profissionais_hardskills (id_profissionais_hardskills,id_profissional, id_hard_skill) VALUES
   (UUID_TO_BIN('8f5a5954-c155-11ee-847c-601895604814'), UUID_TO_BIN('366a7b4a-c09a-11ee-847c-601895604814'), UUID_TO_BIN('27b66009-c096-11ee-847c-601895604814')),
@@ -108,15 +108,15 @@ INSERT INTO tb_servicos (id_servicos, nome_servicos, data_criacao, data_inicio, 
   SELECT BIN_TO_UUID(id_profissional), BIN_TO_UUID(id_squad) FROM tb_profissionais_squads;
   
   INSERT INTO tb_dados_volkswagen (id_dados_volkswagen, chapa_usuario, nome_usuario, email, tipos_usuario) VALUES
-  (UUID_TO_BIN('2d7869af-c154-11ee-847c-601895604814'), 1001, 'João Silva', 'joao@example.com', '0'),
-  (UUID_TO_BIN('2d787b95-c154-11ee-847c-601895604814'), 1002, 'Ana Pereira', 'ana@example.com', '1'),
-  (UUID_TO_BIN('2d787cf8-c154-11ee-847c-601895604814'), 1003, 'Carlos Santos', 'carlos@example.com', '2'),
-  (UUID_TO_BIN('2d787dab-c154-11ee-847c-601895604814'), 1004, 'Maria Rodrigues', 'maria@example.com', '3'),
-  (UUID_TO_BIN('2d787f2c-c154-11ee-847c-601895604814'), 1005, 'Lucas Ferreira', 'lucas@example.com', '1'),
-  (UUID_TO_BIN('2d787fdb-c154-11ee-847c-601895604814'), 1006, 'Fernanda Gomes', 'fernanda@example.com', '0'),
-  (UUID_TO_BIN('2d788086-c154-11ee-847c-601895604814'), 1007, 'Ricardo Alves', 'ricardo@example.com', '3'),
-  (UUID_TO_BIN('2d78812c-c154-11ee-847c-601895604814'), 1008, 'Mariana Martins', 'mariana@example.com', '2'),
-  (UUID_TO_BIN('2d7881f4-c154-11ee-847c-601895604814'), 1009, 'André Oliveira', 'andre@example.com', '1'),
-  (UUID_TO_BIN('2d7882bd-c154-11ee-847c-601895604814'), 1010, 'Juliana Santos', 'juliana@example.com', '0');
+  (UUID_TO_BIN('2d7869af-c154-11ee-847c-601895604814'), 1001, 'João Silva', 'joao@example.com', 'ADMIN'),
+  (UUID_TO_BIN('2d787b95-c154-11ee-847c-601895604814'), 1002, 'Ana Pereira', 'ana@example.com', 'ADMIN'),
+  (UUID_TO_BIN('2d787cf8-c154-11ee-847c-601895604814'), 1003, 'Carlos Santos', 'carlos@example.com', 'ADMIN'),
+  (UUID_TO_BIN('2d787dab-c154-11ee-847c-601895604814'), 1004, 'Maria Rodrigues', 'maria@example.com', 'ADMIN'),
+  (UUID_TO_BIN('2d787f2c-c154-11ee-847c-601895604814'), 1005, 'Lucas Ferreira', 'lucas@example.com', 'ADMIN'),
+  (UUID_TO_BIN('2d787fdb-c154-11ee-847c-601895604814'), 1006, 'Fernanda Gomes', 'fernanda@example.com', 'ADMIN'),
+  (UUID_TO_BIN('2d788086-c154-11ee-847c-601895604814'), 1007, 'Ricardo Alves', 'ricardo@example.com', 'ADMIN'),
+  (UUID_TO_BIN('2d78812c-c154-11ee-847c-601895604814'), 1008, 'Mariana Martins', 'mariana@example.com', 'ADMIN'),
+  (UUID_TO_BIN('2d7881f4-c154-11ee-847c-601895604814'), 1009, 'André Oliveira', 'andre@example.com', 'ADMIN'),
+  (UUID_TO_BIN('2d7882bd-c154-11ee-847c-601895604814'), 1010, 'Juliana Santos', 'juliana@example.com', 'ADMIN');
   
   SELECT *, BIN_TO_UUID(id_dados_volkswagen) FROM tb_dados_volkswagen;

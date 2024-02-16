@@ -12,7 +12,7 @@ CREATE TABLE tb_servicos(
     orcamento DECIMAL (20, 2),
     tempo_servico INT NOT NULL,
 	anexo VARCHAR(2048),
-    tipo_servicos BIT NOT NULL,
+    tipo_servicos VARCHAR(255) NOT NULL,
     /* 0 demanda, 1 projeto*/
     consultoria VARCHAR(2048),
     status_servicos TINYINT NOT NULL
@@ -45,7 +45,7 @@ CREATE TABLE tb_usuarios(
     nome_usuario VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
-    tipos_usuario TINYINT NOT NULL  
+    tipos_usuario VARCHAR(255) NOT NULL  
     /*tipos_usuario ENUM ('Administrador', 'Gestor', 'Profissional', 'Comum') NOT NULL*/
 );
 
@@ -65,7 +65,7 @@ CREATE TABLE tb_profissionais_hardskills(
 	id_profissionais_hardskills BINARY(16) NOT NULL PRIMARY KEY,
 	id_profissional BINARY(16) NOT NULL,
 	id_hard_skill BINARY(16) NOT NULL,
-    FOREIGN KEY (id_profissional) REFERENCES tb_profisionais(id_profissional),
+    FOREIGN KEY (id_profissional) REFERENCES tb_profissionais(id_profissional),
 	FOREIGN KEY (id_hard_skill) REFERENCES tb_hard_skills(id_hard_skill)
 );
 
@@ -80,7 +80,7 @@ CREATE TABLE tb_squads(
 CREATE TABLE tb_profissionais_squads(
 	id_profissional BINARY(16) NOT NULL,
 	id_squad BINARY(16) NOT NULL,
-    FOREIGN KEY (id_profissional) REFERENCES tb_profisionais(id_profissional),
+    FOREIGN KEY (id_profissional) REFERENCES tb_profissionais(id_profissional),
 	FOREIGN KEY (id_squad) REFERENCES tb_squads(id_squad)
 );
 
@@ -89,6 +89,6 @@ CREATE TABLE tb_dados_volkswagen(
     chapa_usuario INT NOT NULL UNIQUE,
     nome_usuario VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-	tipos_usuario TINYINT NOT NULL
+	tipos_usuario VARCHAR(255) NOT NULL
     /*tipos_usuario ENUM ('Administrador', 'Gestor', 'Profissional', 'Comum') NOT NULL*/
 );
